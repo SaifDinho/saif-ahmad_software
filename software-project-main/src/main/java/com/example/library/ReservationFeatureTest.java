@@ -15,12 +15,22 @@ import java.util.List;
 
 /**
  * Manual test to verify Reservation feature works with actual database.
+ * Demonstrates reservation functionality including creation, expiry, and status management.
  * Run this with: mvn exec:java -Dexec.mainClass="com.example.library.ReservationFeatureTest"
+ * 
+ * @author Library System Team
+ * @version 1.0
  */
 public class ReservationFeatureTest {
     
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     
+    /**
+     * Main entry point for the reservation feature test.
+     * Demonstrates complete reservation workflow including creation, management, and cleanup.
+     * 
+     * @param args command line arguments (not used)
+     */
     public static void main(String[] args) {
         System.out.println("==========================================");
         System.out.println("  Reservation Feature Test");

@@ -19,7 +19,11 @@ import java.util.Optional;
 
 /**
  * Admin interface for the Library Management System.
- * Provides functionality for adding media items, searching, and viewing overdue loans.
+ * Provides functionality for adding media items, searching, viewing overdue loans,
+ * and managing users including add, edit, and delete operations.
+ * 
+ * @author Library System Team
+ * @version 1.0
  */
 public class AdminFrame extends JFrame {
     
@@ -34,6 +38,18 @@ public class AdminFrame extends JFrame {
     
     private JTabbedPane tabbedPane;
     
+    /**
+     * Constructs a new AdminFrame with the specified services and repositories.
+     * 
+     * @param currentUser the admin user currently logged in
+     * @param authService the authentication service
+     * @param libraryService the library management service
+     * @param paymentService the payment processing service
+     * @param userRepository the user repository for database operations
+     * @param mediaItemRepository the media item repository
+     * @param fineRepository the fine repository
+     * @param loanRepository the loan repository
+     */
     public AdminFrame(User currentUser, AuthService authService, LibraryService libraryService, PaymentService paymentService, com.example.library.repository.UserRepository userRepository, com.example.library.repository.MediaItemRepository mediaItemRepository, com.example.library.repository.FineRepository fineRepository, com.example.library.repository.LoanRepository loanRepository) {
         this.currentUser = currentUser;
         this.authService = authService;
@@ -46,7 +62,12 @@ public class AdminFrame extends JFrame {
         
         initializeUI();
     }
+
     
+    /**
+     * Initializes the user interface components including tabs and panels.
+     * Sets up the main layout with header, tabbed pane, and logout functionality.
+     */
     private void initializeUI() {
         setTitle("Library Management System - Admin Panel");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,6 +103,12 @@ public class AdminFrame extends JFrame {
         add(headerPanel, BorderLayout.NORTH);
     }
     
+    /**
+     * Creates and returns the panel for adding new media items to the library.
+     * Provides form fields for item details including title, author, type, and copies.
+     * 
+     * @return JPanel containing the add media item interface
+     */
     private JPanel createAddMediaItemPanel() {
         JPanel panel = new JPanel(new BorderLayout(10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
@@ -155,6 +182,20 @@ public class AdminFrame extends JFrame {
         panel.add(field, gbc);
     }
     
+    /**
+     * Saves a new media item to the database after validation.
+     * Validates required fields, parses numerical values, and handles errors.
+     * Shows success message with the generated item ID.
+     * 
+     * @param titleField field containing the item title
+     * @param authorField field containing the item author
+     * @param typeCombo dropdown for item type selection
+     * @param isbnField field containing the ISBN number
+     * @param publisherField field containing the publisher name
+     * @param publicationDateField field containing the publication date
+     * @param totalCopiesField field containing the total number of copies
+     * @param lateFeesField field containing the late fee per day
+     */
     private void saveMediaItem(JTextField titleField, JTextField authorField, JComboBox<String> typeCombo,
                                 JTextField isbnField, JTextField publisherField, JTextField publicationDateField,
                                 JTextField totalCopiesField, JTextField lateFeesField) {
@@ -1005,6 +1046,12 @@ public class AdminFrame extends JFrame {
         return panel;
     }
     
+    /**
+     * Creates and returns the user management panel with add, edit, and delete functionality.
+     * Includes a table displaying all users and action buttons for user operations.
+     * 
+     * @return JPanel containing the user management interface
+     */
     private JPanel createUserManagementPanel() {
         JPanel panel = new JPanel(new BorderLayout(10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
@@ -1060,6 +1107,12 @@ public class AdminFrame extends JFrame {
         return panel;
     }
     
+    /**
+     * Loads all users from the database and displays them in the user table.
+     * Formats user data including creation timestamp for display.
+     * 
+     * @param tableModel the table model to populate with user data
+     */
     private void loadUsers(DefaultTableModel tableModel) {
         try {
             List<User> users = userRepository.findAll();
@@ -1082,12 +1135,21 @@ public class AdminFrame extends JFrame {
         }
     }
     
+    /**
+     * Refreshes the user management table by reloading all users from database.
+     * Retrieves the table model from the User Management tab and updates it.
+     */
     private void refreshUserTable() {
         JPanel userManagementPanel = (JPanel) tabbedPane.getComponentAt(2); // User Management is 3rd tab (index 2)
         DefaultTableModel tableModel = (DefaultTableModel) userManagementPanel.getClientProperty("tableModel");
         loadUsers(tableModel);
     }
     
+    /**
+     * Opens a dialog to create a new user with validation.
+     * Collects user information including username, password, email, and role.
+     * Validates input data and saves the new user to the database.
+     */
     private void createNewUser() {
         JDialog dialog = new JDialog(this, "Create New User", true);
         dialog.setSize(400, 350);
@@ -1233,6 +1295,11 @@ public class AdminFrame extends JFrame {
         dialog.setVisible(true);
     }
     
+    /**
+     * Opens a dialog to edit the selected user's information.
+     * Allows editing of email, role, and password. Validates that current admin 
+     * cannot edit themselves and ensures data integrity.
+     */
     private void editUser() {
         JPanel userManagementPanel = (JPanel) tabbedPane.getComponentAt(2); // User Management tab
         JTable userTable = (JTable) userManagementPanel.getClientProperty("userTable");
@@ -1400,6 +1467,11 @@ public class AdminFrame extends JFrame {
         }
     }
     
+    /**
+     * Deletes the selected user from the database after confirmation.
+     * Validates that the current admin cannot delete themselves and checks for active loans.
+     * Shows confirmation dialog before performing the deletion.
+     */
     private void deleteUser() {
         JPanel userManagementPanel = (JPanel) tabbedPane.getComponentAt(2); // User Management tab
         JTable userTable = (JTable) userManagementPanel.getClientProperty("userTable");
@@ -1463,6 +1535,10 @@ public class AdminFrame extends JFrame {
         }
     }
     
+    /**
+     * Logs out the current admin user and returns to the login screen.
+     * Shows confirmation dialog before logging out and closes the admin frame.
+     */
     private void logout() {
         int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to logout?",
                 "Logout", JOptionPane.YES_NO_OPTION);

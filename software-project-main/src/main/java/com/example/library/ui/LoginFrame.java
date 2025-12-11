@@ -9,6 +9,10 @@ import java.awt.*;
 /**
  * Login window for the Library Management System.
  * Authenticates users and routes them to appropriate interface based on role.
+ * Admin users are directed to AdminFrame, regular users to UserFrame.
+ * 
+ * @author Library System Team
+ * @version 1.0
  */
 public class LoginFrame extends JFrame {
     
@@ -24,11 +28,29 @@ public class LoginFrame extends JFrame {
     private JPasswordField passwordField;
     private JButton loginButton;
     
-    // Constructor for testing with minimal dependencies
+    /**
+     * Constructor for testing with minimal dependencies.
+     * Uses only AuthService for authentication without full service dependencies.
+     * 
+     * @param authService the authentication service for user login validation
+     */
     public LoginFrame(AuthService authService) {
         this(authService, null, null, null, null, null, null);
     }
     
+    /**
+     * Full constructor for LoginFrame with all required services and repositories.
+     * Initializes the login interface with complete dependency injection for
+     * proper routing to admin or user interfaces after successful authentication.
+     * 
+     * @param authService the authentication service for user login validation
+     * @param libraryService the library management service for user operations
+     * @param paymentService the payment processing service
+     * @param userRepository the user repository for database operations
+     * @param mediaItemRepository the media item repository
+     * @param fineRepository the fine repository
+     * @param loanRepository the loan repository
+     */
     public LoginFrame(AuthService authService, LibraryService libraryService, PaymentService paymentService, 
                       com.example.library.repository.UserRepository userRepository,
                       com.example.library.repository.MediaItemRepository mediaItemRepository,
@@ -45,6 +67,11 @@ public class LoginFrame extends JFrame {
         initializeUI();
     }
     
+    /**
+     * Initializes the user interface components for the login screen.
+     * Sets up the main layout with title, form fields for username and password,
+     * and login button. Configures window properties and styling.
+     */
     private void initializeUI() {
         setTitle("Library Management System - Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -120,6 +147,12 @@ public class LoginFrame extends JFrame {
         });
     }
     
+    /**
+     * Performs user authentication and routes to appropriate interface.
+     * Validates username and password input, authenticates against database,
+     * and opens AdminFrame for admin users or UserFrame for regular users.
+     * Shows error messages for failed authentication attempts.
+     */
     private void performLogin() {
         String username = usernameField.getText().trim();
         String password = new String(passwordField.getPassword());

@@ -6,8 +6,13 @@ import com.example.library.repository.UserRepository;
 import java.util.Optional;
 
 /**
- * Implementation of the authentication service.
- * Provides user login and role verification functionality.
+ * Implementation of the authentication service for the Library Management System.
+ * Provides secure user authentication and role verification functionality.
+ * Uses case-sensitive username lookup and exact password matching for security.
+ * Implements proper input validation and error handling for authentication operations.
+ * 
+ * @author Library System Team
+ * @version 1.0
  */
 public class AuthServiceImpl implements AuthService {
     

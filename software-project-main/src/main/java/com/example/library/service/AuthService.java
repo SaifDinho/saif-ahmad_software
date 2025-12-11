@@ -4,7 +4,11 @@ import com.example.library.domain.User;
 
 /**
  * Service interface for authentication operations.
- * Handles user login and role verification.
+ * Handles user login and role verification for the Library Management System.
+ * Provides secure authentication mechanisms and role-based access control.
+ * 
+ * @author Library System Team
+ * @version 1.0
  */
 public interface AuthService {
     

@@ -17,6 +17,10 @@ import java.util.List;
 /**
  * User interface for the Library Management System.
  * Provides functionality for searching items, borrowing, returning, and managing fines.
+ * Regular users can search and borrow media items, view their loans, and pay fines.
+ * 
+ * @author Library System Team
+ * @version 1.0
  */
 public class UserFrame extends JFrame {
     
@@ -28,6 +32,16 @@ public class UserFrame extends JFrame {
     
     private JTabbedPane tabbedPane;
     
+    /**
+     * Constructs a new UserFrame for the specified user with required services.
+     * Initializes the user interface with tabs for searching, borrowing, and managing loans.
+     * 
+     * @param currentUser the user currently logged in
+     * @param authService the authentication service
+     * @param libraryService the library management service
+     * @param paymentService the payment processing service
+     * @param userRepository the user repository for database operations
+     */
     public UserFrame(User currentUser, AuthService authService, LibraryService libraryService, PaymentService paymentService, com.example.library.repository.UserRepository userRepository) {
         this.currentUser = currentUser;
         this.authService = authService;
@@ -38,6 +52,11 @@ public class UserFrame extends JFrame {
         initializeUI();
     }
     
+    /**
+     * Initializes the user interface components for the regular user screen.
+     * Sets up tabs for searching items, viewing loans, managing fines, and profile.
+     * Configures window properties and user-specific header.
+     */
     private void initializeUI() {
         setTitle("Library Management System - User Panel");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

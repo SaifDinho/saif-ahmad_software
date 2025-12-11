@@ -12,8 +12,13 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Implementation of ReservationService.
- * Manages item reservations with queue functionality.
+ * Implementation of ReservationService for the Library Management System.
+ * Manages item reservations with queue functionality and expiry handling.
+ * Provides business logic for reservation creation, status management, and notifications.
+ * Ensures proper validation and maintains reservation integrity.
+ * 
+ * @author Library System Team
+ * @version 1.0
  */
 public class ReservationServiceImpl implements ReservationService {
     
@@ -22,6 +27,14 @@ public class ReservationServiceImpl implements ReservationService {
     private final MediaItemRepository mediaItemRepository;
     private final int RESERVATION_EXPIRY_HOURS = 48; // Reservation valid for 48 hours
     
+    /**
+     * Constructs a new reservation service with required repositories.
+     * Initializes with 48-hour reservation expiry period.
+     * 
+     * @param reservationRepository the repository for reservation operations
+     * @param userRepository the repository for user operations
+     * @param mediaItemRepository the repository for media item operations
+     */
     public ReservationServiceImpl(ReservationRepository reservationRepository,
                                  UserRepository userRepository,
                                  MediaItemRepository mediaItemRepository) {

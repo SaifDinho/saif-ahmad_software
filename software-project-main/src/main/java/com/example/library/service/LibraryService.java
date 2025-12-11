@@ -7,8 +7,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Service interface for core library operations.
+ * Service interface for core library operations in the Library Management System.
  * Handles media item management, borrowing, returning, and loan tracking.
+ * Provides business logic for inventory management and user loan eligibility.
+ * Ensures proper validation and maintains data integrity for all library operations.
+ * 
+ * @author Library System Team
+ * @version 1.0
  */
 public interface LibraryService {
     

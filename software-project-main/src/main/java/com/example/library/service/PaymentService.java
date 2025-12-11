@@ -6,8 +6,14 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * Service interface for payment operations.
- * Handles fine payments and outstanding balance queries.
+ * Service interface for payment operations in the Library Management System.
+ * Handles fine payments and outstanding balance queries for library users.
+ * Provides financial management functionality including fine calculation,
+ * payment processing, and balance tracking.
+ * Ensures accurate financial records and payment history maintenance.
+ * 
+ * @author Library System Team
+ * @version 1.0
  */
 public interface PaymentService {
     

@@ -9,9 +9,20 @@ import javax.swing.*;
 /**
  * Swing GUI application bootstrapper for the Library Management System.
  * Initializes repositories, services, and launches the login window.
+ * Sets up dependency injection for all components and starts the user interface.
+ * 
+ * @author Library System Team
+ * @version 1.0
  */
 public class LibraryApplication {
     
+    /**
+     * Main entry point for the Library Management System GUI application.
+     * Initializes all repositories and services with dependency injection,
+     * then launches the login window to start the application.
+     * 
+     * @param args command line arguments (not used)
+     */
     public static void main(String[] args) {
         // Initialize repositories
         UserRepository userRepository = new JdbcUserRepository();

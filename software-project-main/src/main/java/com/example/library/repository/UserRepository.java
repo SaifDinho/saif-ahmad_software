@@ -4,6 +4,14 @@ import com.example.library.domain.User;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Repository interface for User entity operations.
+ * Provides CRUD operations and specialized queries for user management.
+ * Supports authentication, user lookup by various criteria, and role-based queries.
+ * 
+ * @author Library System Team
+ * @version 1.0
+ */
 public interface UserRepository {
     
     /**

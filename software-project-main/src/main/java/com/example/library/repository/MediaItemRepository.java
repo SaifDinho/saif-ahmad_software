@@ -4,6 +4,14 @@ import com.example.library.domain.MediaItem;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Repository interface for MediaItem entity operations.
+ * Provides CRUD operations and specialized queries for media item management.
+ * Supports search functionality, availability tracking, and inventory management.
+ * 
+ * @author Library System Team
+ * @version 1.0
+ */
 public interface MediaItemRepository {
     
     /**
