@@ -33,7 +33,7 @@ jobs:
     
     - name: SonarQube Scan
       if: env.SONAR_TOKEN != null && env.SONAR_HOST_URL != null
-      uses: sonarsource/sonarqube-scan-action@master
+      run: mvn sonar:sonar
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
