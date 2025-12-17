@@ -131,6 +131,9 @@
                                 <!-- Exclude only com.example.library package (App and DatabaseConnection) -->
                                 <exclude>com/example/library/*.class</exclude>
                                 
+                                <!-- Exclude repository bundle -->
+                                <exclude>com/example/library/repository/**/*.class</exclude>
+                                
                                 <!-- Existing excludes -->
                                 <exclude>com/example/library/ui/**/*.class</exclude>
                                 <exclude>com/example/library/ReservationFeatureTest.class</exclude>
@@ -170,11 +173,21 @@
                         <!-- Exclude only com.example.library package (App and DatabaseConnection) -->
                         <exclude>com/example/library/*.class</exclude>
                         
+                        <!-- Exclude repository bundle -->
+                        <exclude>com/example/library/repository/**/*.class</exclude>
+                        
                         <!-- Existing excludes -->
                         <exclude>com/example/library/ui/**/*.class</exclude>
                         <exclude>com/example/library/ReservationFeatureTest.class</exclude>
                     </excludes>
                 </configuration>
+            </plugin>
+            
+            <!-- SonarQube Maven Plugin -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>4.0.0.4121</version>
             </plugin>
         </plugins>
     </build>
