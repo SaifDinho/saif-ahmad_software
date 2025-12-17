@@ -32,6 +32,7 @@ jobs:
       run: mvn clean test jacoco:report -DfailIfNoTests=false
     
     - name: SonarQube Scan
+      if: env.SONAR_TOKEN != null && env.SONAR_HOST_URL != null
       uses: sonarsource/sonarqube-scan-action@master
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

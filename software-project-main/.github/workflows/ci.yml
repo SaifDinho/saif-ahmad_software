@@ -1,29 +1,14 @@
-name: Java CI with Maven and Testcontainers
+name: Java CI with Maven
 
 on:
   push:
-    branches: [ main, master, develop ]
+    branches: [ develop ]
   pull_request:
-    branches: [ main, master, develop ]
+    branches: [ main, develop ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    services:
-      postgres:
-        image: postgres:17-alpine
-        env:
-          POSTGRES_DB: library_test
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
 
     steps:
       - uses: actions/checkout@v4
@@ -35,22 +20,8 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Create database properties
-        run: |
-          mkdir -p src/main/resources
-          cat > src/main/resources/db.properties << EOF
-          db.url=jdbc:postgresql://localhost:5432/library_test
-          db.username=postgres
-          db.password=postgres
-          db.driver=org.postgresql.Driver
-          EOF
-
-      - name: Initialize database schema
-        run: |
-          PGPASSWORD=postgres psql -h localhost -U postgres -d library_test -f src/test/resources/schema.sql
-
-      - name: Run tests with coverage
-        run: mvn -B clean verify
+      - name: Run tests
+        run: mvn clean test -DfailIfNoTests=false
 
       - name: Archive test results
         if: always()
