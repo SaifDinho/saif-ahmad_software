@@ -19,7 +19,7 @@
         <mockito.version>5.2.0</mockito.version>
         <sqlite.version>3.42.0.0</sqlite.version>
         <sonar.organization>saifdinho</sonar.organization>
-        <sonar.projectKey>library-management-system</sonar.projectKey>
+        <sonar.projectKey>saifdinho_library-management-system</sonar.projectKey>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <jacoco.version>0.8.8</jacoco.version>
     </properties>
