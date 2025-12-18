@@ -31,12 +31,12 @@ jobs:
     - name: Run tests and generate coverage
       run: mvn clean test jacoco:report -DfailIfNoTests=false
     
-    # - name: SonarQube Scan
-    #   if: env.SONAR_TOKEN != null && env.SONAR_HOST_URL != null
-    #   run: mvn sonar:sonar
-    #   env:
-    #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    #     SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+    - name: SonarQube Scan
+      if: env.SONAR_TOKEN != null && env.SONAR_HOST_URL != null
+      run: mvn sonar:sonar -Dsonar.projectKey=saifdinho_library-management-system
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
     
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4
